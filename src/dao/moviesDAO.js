@@ -345,6 +345,12 @@ export default class MoviesDAO {
       // TODO Ticket: Error Handling
       // Catch the InvalidId error by string matching, and then handle it.
       console.error(`Something went wrong in getMovieByID: ${e}`)
+      const strError = e.toString()
+      if (
+        strError.includes("duplicate key error collection") ||
+        strError.includes("Argument passed in must be a single String")
+      )
+        return null
       throw e
     }
   }
